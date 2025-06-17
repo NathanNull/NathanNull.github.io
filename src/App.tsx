@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { Outlet } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  return <div style={styles.container}>
+    <Outlet />
+  </div>
 }
 
-export default App;
+const styles: { [n: string]: React.CSSProperties } = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+    backgroundColor: "#282c34",
+    fontSize: "calc(10px + 2vmin)",
+    color: "white",
+    minHeight: '100vh',
+  }
+}

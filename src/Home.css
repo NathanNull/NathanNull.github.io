@@ -1,0 +1,28 @@
+@media (prefers-reduced-motion: no-preference) {
+  #appLogo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+.slide {
+  background-color: white;
+  border-radius: 5%;
+}
+
+@keyframes App-logo-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(180deg);
+  }
+  45% {
+    transform: rotate(30deg);
+  }
+  75% {
+    transform: rotate(200deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
