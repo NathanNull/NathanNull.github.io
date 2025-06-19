@@ -1,13 +1,15 @@
 import { JSX, useState } from 'react';
 import './Home.css';
-import banana from './banana.webp';
-import orange from './orange.jpg';
+import banana from './assets/banana.webp';
+import orange from './assets/orange.jpg';
+import isThumbnail from './assets/item-signout-thumbnail.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/bundle";
+import { useNavigate } from 'react-router-dom';
 
-function ProjectCard({ title, children }: { title: string, children: JSX.Element[] | JSX.Element }) {
-  return <div style={styles.card}>
+function ProjectCard({ title, link, children }: { title: string, link: ()=>any, children: JSX.Element[] | JSX.Element }) {
+  return <div style={styles.card} onClick={link}>
     {title}
     {children}
   </div>
@@ -15,30 +17,36 @@ function ProjectCard({ title, children }: { title: string, children: JSX.Element
 
 export default function Home() {
   const [swiperSlides, setSwiperSlides] = useState(3);
-  const slides: { name: string, img: string }[] = [{
-    name: "Banana #1",
-    img: banana
+  const slides: { name: string, img: string, link: string }[] = [{
+    name: "Item Signout App",
+    link: "/itemsignout",
+    img: isThumbnail
   }, {
     name: "Banana #2",
+    link: "/home",
     img: banana
   }, {
     name: "Banana #3",
+    link: "/home",
     img: banana
   }, {
     name: "Orange you glad I didn't say banana",
+    link: "/home",
     img: orange
   },{
     name: "jk banana #4",
+    link: "/home",
     img: banana
   }];
   const resize = () => {
     let expectedSlides = window.screen.availWidth / window.screen.availHeight < 1 ? 1 : 3;
-    if (swiperSlides != expectedSlides) {
+    if (swiperSlides !== expectedSlides) {
       setSwiperSlides(expectedSlides)
     }
   };
   resize();
   window.onresize = resize;
+  const navigate = useNavigate();
   return (
     <div style={styles.appBody}>
       <div style={styles.appLogo} id="appLogo">Cool app logo or project demo or something goes here<br />Lorem ipsum dolor sit amet</div>
@@ -53,9 +61,9 @@ export default function Home() {
         loopAddBlankSlides={true}
         grabCursor={true}
       >
-        {slides.map(({name, img}) => <SwiperSlide>
-          <ProjectCard title={name}>
-            <img src={img}/>
+        {slides.map(({name, img, link}) => <SwiperSlide>
+          <ProjectCard title={name} link={()=>navigate(link)}>
+            <img src={img} alt={name+" thumbnail"}/>
           </ProjectCard>
         </SwiperSlide>)}
       </Swiper>

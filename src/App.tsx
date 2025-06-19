@@ -1,9 +1,9 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
 
-export default function App() {
+export default function App({error}:{error: boolean}) {
   return <div style={styles.container}>
-    <Outlet />
+    {error?<>Page not found</>:<Outlet />}
   </div>
 }
 
